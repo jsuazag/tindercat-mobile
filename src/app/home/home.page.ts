@@ -40,11 +40,29 @@ export class HomePage implements OnInit {
     this.catViewed = this.catList[this.indexCat];
   }
 
+  private moveToRight() { // ->
+    if (this.indexCat === this.catList.length - 1) {
+      this.indexCat = 0;
+    } else {
+      this.indexCat += 1;
+    }
+    this.loadCatView(this.indexCat);
+  }
+
+  private moveToLeft() { // <-
+    if (this.indexCat === 0) {
+      this.indexCat = this.catList.length - 1
+    } else {
+      this.indexCat -= 1;
+    }
+    this.loadCatView(this.indexCat);
+  }
+
   private getAllCats () {
     this.apiService.getCats(this.tokenCat).subscribe(response => {
       console.log('response', response);
       this.catList = response.catsAvailable;
-      this.loadCatView(0)
+      this.loadCatView(0);
     })
   }
 
@@ -67,8 +85,10 @@ export class HomePage implements OnInit {
     console.log(`deltaX ${deltaX} type ${type} currentx ${currentX} velocityX ${velocityX}`);
     if (deltaX < 0) {
       console.log('mover a la izquierda')
+      this.moveToLeft();
     } else {
       console.log('mover a la derecha')
+      this.moveToRight();
     }
   }
 

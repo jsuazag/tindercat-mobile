@@ -8,13 +8,13 @@
 
   <section id="view-cat">
     <ion-card>
-      <ion-img [src]="'https://static.wixstatic.com/media/c3bc49_896623ece76c4ef2945ad8d7514523a5~mv2.jpg/v1/fill/w_626,h_461/c3bc49_896623ece76c4ef2945ad8d7514523a5~mv2.jpg'"></ion-img>
+      <ion-img [src]="catViewed.image"></ion-img>
       <ion-card-header>
-        <ion-card-subtitle>M</ion-card-subtitle>
-        <ion-card-title>@emma</ion-card-title>
+        <ion-card-subtitle>{{ catViewed.name }}</ion-card-subtitle>
+        <ion-card-title>{{ catViewed.nick }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        Me gusta cazar y comer hamburguesas ...
+        {{ catViewed.bio }}
       </ion-card-content>
     </ion-card>
   </section>
