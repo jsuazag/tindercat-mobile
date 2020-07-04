@@ -1,0 +1,16 @@
+form {
+    margin: 40px 35px;
+
+    ion-button {
+        margin-top: 40px;
+    }
+
+    .logo-app {
+        display: flex;
+        justify-content: center;
+
+        ion-img {
+            width: 200px;
+        }
+    }
+}
