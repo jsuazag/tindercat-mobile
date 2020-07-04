@@ -1,0 +1,7 @@
+{
+  "name": "tindercat-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
