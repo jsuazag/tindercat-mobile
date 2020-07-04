@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Gesture, GestureController } from '@ionic/angular';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +10,42 @@ import { Gesture, GestureController } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
 
-  constructor(private gestureCtrl: GestureController) { }
+  private tokenCat: string = '';
+  private catViewed: any = {};
+  private catList: any[] = [];
+  private indexCat: number = -1;
+
+  constructor(
+      private gestureCtrl: GestureController,
+      private activatedRoute: ActivatedRoute,
+      private router: Router,
+      private apiService: ApiService
+    ) { }
 
   ngOnInit() {
     this.initGesture();
+    this.getParams();
+  }
+
+  private getParams() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      console.log('params', params)
+      this.tokenCat = params.token;
+      this.getAllCats();
+    })
+  }
+
+  private loadCatView(index: number) {
+    this.indexCat = index;
+    this.catViewed = this.catList[this.indexCat];
+  }
+
+  private getAllCats () {
+    this.apiService.getCats(this.tokenCat).subscribe(response => {
+      console.log('response', response);
+      this.catList = response.catsAvailable;
+      this.loadCatView(0)
+    })
   }
 
   private initGesture() {
